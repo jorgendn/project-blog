@@ -6,6 +6,7 @@ import styles from './postSlug.module.css';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import { loadBlogPost } from '@/helpers/file-helpers';
 import { BLOG_TITLE } from '@/constants';
+import COMPONENT_MAP from '@/helpers/mdx-components';
 
 export async function generateMetadata({ params }) {
   const { frontmatter: { title, abstract } } = await loadBlogPost(params.postSlug);
@@ -26,7 +27,7 @@ async function BlogPost({ params }) {
         publishedOn={publishedOn}
       />
       <div className={styles.page}>
-        <MDXRemote source={content} />
+        <MDXRemote source={content} components={COMPONENT_MAP} />
       </div>
     </article>
   );
